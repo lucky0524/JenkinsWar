@@ -24,7 +24,7 @@ node{
     {
         withCredentials([string(credentialsId: 'lucky0524', variable: 'docker_hub_password')])
         {
-            sh "docker login -u lucky0524 -p ${docker_hub_password}'
+            sh 'docker login -u lucky0524 -p ${docker_hub_password}'
         }
         sh 'docker push lucky0524/jenkinswar:${buildnumber}'
     }
