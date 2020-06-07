@@ -18,6 +18,6 @@ node{
     }*/
     stage('Build Docker Image')
     {
-        sh "docker built -t lucky0524/jenkinswar ."
+        sh "docker build -t lucky0524/jenkinswar ."
     }
 }
