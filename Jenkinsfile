@@ -9,11 +9,15 @@ node{
     {
         sh "${mavenHome}/bin/mvn clean package"
     }
-    stage('Deploy To Tomcat')
+    /*stage('Deploy To Tomcat')
     {
         sshagent(credentials:['sshauth']) 
         {
             sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.8.246:/opt/apache-tomcat-9.0.35/webapps/'
         }
+    }*/
+    stage('Build Docker Image')
+    {
+        sh "docker built -t lucky0524/jenkinswar ."
     }
 }
