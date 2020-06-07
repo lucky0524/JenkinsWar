@@ -22,10 +22,7 @@ node{
     }
     state('Push Docker Image')
     {
-        withCredentials([usernameColonPassword(credentialsId: 'hubdocker', variable: 'hubdocker')])
-        {
-            sh "docker login -u lucky0524 -p ${hubdocker}"
-        }
+        sh "docker login -u lucky0524 -p King@5559"
         sh "docker push lucky0524/jenkinswar:${buildnumber}"
     }    
 }
