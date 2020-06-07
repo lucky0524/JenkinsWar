@@ -1,6 +1,6 @@
 node{
     def mavenHome=tool name: "maven3"
-    //def tomcatWeb = '/opt/apache-tomcat-9.0.35/webapps'
+    def buildnumber = env.BUILD_NUMBER
     stage('git checkout')
     {
         git credentialsId: 'git', url: 'https://github.com/lucky0524/JenkinsWar.git'
@@ -18,6 +18,15 @@ node{
     }*/
     stage('Build Docker Image')
     {
-        sh "docker build -t lucky0524/jenkinswar ."
+        sh "docker build -t lucky0524/jenkinswar:${buildnumber} ."
     }
+    state('Store Docker Image')
+    {
+        withCredentials([string(credentialsId: 'lucky0524', variable: 'docker_hub_password')])
+        {
+            sh "docker login -u lucky0524 -p ${docker_hub_password}'
+        }
+        sh 'docker push lucky0524/jenkinswar:${buildnumber}'
+    }
+    
 }
