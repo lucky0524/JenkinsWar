@@ -20,11 +20,11 @@ node{
     {
         sh "docker build -t lucky0524/jenkinswar:${buildnumber} ."
     }
-    state('Store Docker Image')
+    state('Push Docker Image')
     {
-        withCredentials([string(credentialsId: 'dockercredentials', variable: 'docker')])
+        withCredentials([string(credentialsId: 'dockercredentials', variable: 'dockercredentials')])
         {
-            sh 'docker login -u lucky0524 -p ${docker}'
+            sh 'docker login -u lucky0524 -p ${dockercredentials}'
         }
         sh 'docker push lucky0524/jenkinswar:${buildnumber}'
     }
