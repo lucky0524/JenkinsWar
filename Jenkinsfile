@@ -30,7 +30,7 @@ node{
     {
         withCredentials([string(credentialsId: 'lucky0524', variable: 'docker')])
         {
-            sh "docker login -u lucky0524 -p ${lucky0524}"
+            sh "docker login -u lucky0524 -p ${docker}"
         }
         sh "docker push lucky0524/jenkinswar:${buildnumber}"
     }
