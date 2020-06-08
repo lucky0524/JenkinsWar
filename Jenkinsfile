@@ -34,4 +34,15 @@ node{
         }
         sh "docker push lucky0524/jenkinswar:${buildnumber}"
     }
+    stage('Run Docker Image In Dev Server')
+    {
+        def dockerRun = ' docker run  -d -p 8080:8080 --name jenkinswarcontainer lucky0524/jenkinswar:${buildnumber}'
+        sshagent(['dockerserver'])
+        {
+            sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.136 docker stop jenkinswaercontainer || true'
+            sh 'ssh  ubuntu@172.31.12.136 docker rm jenkinswaercontainer || true'
+            sh 'ssh  ubuntu@172.31.12.136 docker rmi -f  $(docker images -q) || true'
+            sh "ssh  ubuntu@172.31.12.136 ${dockerRun}"
+        }
+    }  
 }
