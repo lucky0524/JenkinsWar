@@ -41,7 +41,7 @@ node{
             sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.12.136 docker stop jenkinswaercontainer || true'
             sh 'ssh  ubuntu@172.31.12.136 docker rm jenkinswaercontainer || true'
             sh 'ssh  ubuntu@172.31.12.136 docker rmi -f  $(docker images -q) || true'
-            sh "ssh  ubuntu@172.31.12.136 docker run  -d -p 8080:8080 --name jenkinswarcontainer lucky0524/jenkinswar:${buildnumber}"
+            sh "ssh  ubuntu@172.31.12.136 docker run  -d -p 8089:8080 --name jenkinswarcontainer lucky0524/jenkinswar:${buildnumber}"
         }
     }  
 }
