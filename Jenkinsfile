@@ -13,10 +13,6 @@ node{
     {
         sh "${mavenHome}/bin/mvn sonar:sonar"
     }
-    stage('Push Artifacts to nexus Artifactory')
-    {
-        sh "${mavenHome}/bin/mvn deploy"
-    }
     /*stage('Deploy To Tomcat')
     {
         sshagent(credentials:['sshauth']) 
@@ -27,10 +23,5 @@ node{
     stage('Build Docker Image')
     {
         sh "docker build -t lucky0524/jenkinswar:${buildnumber} ."
-    }
-    state('Push Docker Image')
-    {
-   
-        sh "docker push lucky0524/jenkinswar:${buildnumber}"
-    }    
+    } 
 }
