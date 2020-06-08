@@ -13,6 +13,7 @@ node{
     {
         sh "${mavenHome}/bin/mvn sonar:sonar"
     }
+ 
     /*stage('Deploy To Tomcat')
     {
         sshagent(credentials:['sshauth']) 
@@ -20,8 +21,17 @@ node{
             sh 'scp -o StrictHostKeyChecking=no target/*.war ec2-user@172.31.8.246:/opt/apache-tomcat-9.0.35/webapps/'
         }
     }*/
+    
     stage('Build Docker Image')
     {
         sh "docker build -t lucky0524/jenkinswar:${buildnumber} ."
-    } 
+    }
+    stage('Push Docker Image')
+    {
+        withCredentials([string(credentialsId: 'lucky0524', variable: 'docker')])
+        {
+            sh "docker login -u lucky0524 -p ${lucky0524}"
+        }
+        sh "docker push lucky0524/jenkinswar:${buildnumber}"
+    }
 }
