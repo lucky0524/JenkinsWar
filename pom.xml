@@ -7,6 +7,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>JenkinsWar Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  
+  <properties>
+		<sonar.host.url>http://13.232.232.184:9000/</sonar.host.url>
+		<sonar.login>admin</sonar.login>
+		<sonar.password>admin</sonar.password>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -15,6 +24,21 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <distributionManagement>
+	    <repository>
+	      <id>nexus</id>
+	      <name>Releases Nexus Repository</name>
+	      <url></url>
+	    </repository>
+	    
+	    <snapshotRepository>
+	      <id>nexus</id>
+	      <name>Snapshot Nexus Repository </name>
+	      <url></url>
+	    </snapshotRepository>
+	</distributionManagement>
+  
   <build>
     <finalName>JenkinsWar</finalName>
   </build>
